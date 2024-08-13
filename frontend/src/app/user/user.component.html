@@ -1,0 +1,18 @@
+<div class="">
+    <div class="m-auto col-12 xl:col-8 flex justify-content-between align-items-center">
+        <img width="64px" src="../../assets/images/tom.jpg" alt="">
+        <div *ngIf="currentUser" class="">
+            <p>
+                Current User
+            </p>
+            <p-button  label="Logout"></p-button>
+        </div>
+        <div *ngIf="!currentUser" class="">
+        
+            <p-button [routerLink]="['./login']"  label="Login"></p-button>
+        </div>
+    </div>
+ <h2 class="mb-2 mt-5 text-center  text-4xl">FEEDS</h2>
+</div>
+<router-outlet></router-outlet>
+

@@ -1,0 +1,84 @@
+<p-dataView #dv [value]="posts" [layout]="'grid'" [rows]="10" [paginator]="true">
+  <ng-template pTemplate="header">
+    <div class="flex justify-content-end">
+      <p-button
+        (click)="openDialogAdd()"
+        label="Write"
+        severity="success"
+      ></p-button>
+
+      <!-- <p-dataViewLayoutOptions [layout]="layout" /> -->
+    </div>
+  </ng-template>
+
+  <ng-template let-product pTemplate="grid" let-posts>
+    <div class="grid grid-nogutter">
+      <div
+        class="col-12 sm:col-12 lg:col-6 md:col-6 xl:col-4 p-2"
+        *ngFor="let post of posts"
+      >
+      <app-post
+      [canEdit]="true"
+      [post]="post"
+      (isEdit)="openDialogEdit(post)"
+      ></app-post>
+      
+     
+      </div>
+    </div>
+  </ng-template>
+</p-dataView>
+<div class="card flex justify-content-center">
+  <p-dialog
+    header="Header"
+    [modal]="true"
+    [(visible)]="isVisible"
+    [style]="{ width: '50rem' }"
+    [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+    [maximizable]="true"
+  >
+    <ng-template pTemplate="content">
+      <div *ngIf="isEditable" class="flex flex-column gap-2 mb-4">
+        <label for="id">ID</label>
+        <input pInputText id="id" readonly [(ngModel)]="post.id" />
+      </div>
+      <div class="flex flex-column gap-2 mb-4">
+        <label for="title">Title</label>
+        <input pInputText id="title" [(ngModel)]="post.title" />
+      </div>
+      <div  class="flex flex-column gap-2 mb-4">
+        <label for="tags">Tags</label>
+        <p-chips [(ngModel)]="post.tags"></p-chips>
+      </div>
+      <div  class="flex flex-column gap-2 mb-4">
+        <label for="content">Content</label>
+        <textarea
+          id="content"
+          rows="5"
+          cols="30"
+          pInputTextarea
+          [(ngModel)]="post.content"
+        ></textarea>
+      </div>
+
+      <ng-container *ngIf="isEditable">
+        <div class="flex flex-column gap-2 mb-4">
+          <label for="createAt">Create At</label>
+          <input pInputText id="createAt" [(ngModel)]="post.createAt" />
+        </div>
+      </ng-container>
+
+      <div class="flex gap-2 mb-4">
+        <p-button
+          (click)="delete($event)"
+          label="Delete"
+          severity="danger"
+        ></p-button>
+        <p-button (click)="save()" label="Save" severity="success"></p-button>
+      </div>
+    </ng-template>
+  </p-dialog>
+</div>
+<!-- toast -->
+<p-toast></p-toast>
+<p-confirmDialog />
