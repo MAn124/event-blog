@@ -50,9 +50,9 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post updatePost(long id, PostRequest request) {
         Post post = getPostById(id);
-
+        post.setCreateBy(request.getCreateBy());
         post.setTitle(request.getTitle());
-
+        post.setTags(request.getTags());
         post.setContent(request.getContent());
         return postRepository.save(post);
     }

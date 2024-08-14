@@ -27,9 +27,10 @@ public class Prefilter extends OncePerRequestFilter {
     private final JwtService jwtService;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        response.setHeader("Access-Control-Allow-Origin","http://localhost:4200");
         //Lay token tu header
         final String authorization = request.getHeader("Authorization");
-        log.info("Authorization: {}", authorization);
+
         // Kiem tra token co ton tai hay khong, neu khong thi tra ve rong
         if(StringUtils.isBlank(authorization) || !authorization.startsWith("Bearer ")){
             filterChain.doFilter(request,response);
@@ -37,7 +38,7 @@ public class Prefilter extends OncePerRequestFilter {
         }
         //Tach token tu header, chi lay token bo bearer
         final String token = authorization.substring("Bearer ".length());
-        log.info("token: {}", token);
+
 //        // extract token de so sanh thong tin trong database
         final  String userName = jwtService.extractUsername(token);
 //      // kiem tra username co rong khong hay da cap quyen chua

@@ -8,12 +8,11 @@ import { BASE_URL } from '../config/config';
   providedIn: 'root'
 })
 export class AuthService {
-
+  private apiUrl = 'http://localhost:8080/v1/api/auth/login';
   constructor(private http: HttpClient) { }
-  login(credentials: {email: any, password: any}):Observable<any>{
-    return  this.http.post<any>(`${BASE_URL}/auth/login`,credentials)
+  login(credentials: {email: any, password: any}):Observable<string>{
+    const headers = { 'Content-Type': 'application/json' };
+    return  this.http.post<string>(this.apiUrl,credentials,{headers})
   }
 }
-interface ApiResponse {
-  data: User[];
-}
+

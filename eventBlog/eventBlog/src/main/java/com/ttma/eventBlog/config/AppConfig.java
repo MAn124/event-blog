@@ -40,12 +40,11 @@ public class AppConfig {
     }
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/v1/api/user/**").authenticated()
-                                .anyRequest().permitAll()
-                        )
+        http .csrf(AbstractHttpConfigurer::disable);
+            http.authorizeHttpRequests(auth -> auth.requestMatchers("**").permitAll().anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(provider()).addFilterBefore(prefilter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
     @Bean

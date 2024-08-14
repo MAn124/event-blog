@@ -9,10 +9,10 @@ import { UserService } from '../service/user.service';
 export class UserIdToNamePipe implements PipeTransform {
 
   constructor(private userService: UserService){}
-  transform(id:string): Observable<string | undefined> {
+  transform(id:string): Observable<any | undefined> {
    
     return this.userService.getUser(id).pipe(
       filter(user => user != null && user != undefined),
-      map(user =>  { return user.username}));  
+      map(user =>  { return user.email}));  
   }
 }

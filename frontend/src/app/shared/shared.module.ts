@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { PostDetailComponent } from './component/post-detail/post-detail.component';
 import { LoginComponent } from './component/login/login.component';
 import { FormsModule } from '@angular/forms';
+import { LikeButtonComponent } from './component/like-button/like-button.component';
 
 
 
@@ -14,7 +15,8 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     PostComponent,
     PostDetailComponent,
-    LoginComponent
+    LoginComponent,
+    LikeButtonComponent
   ],
   imports: [
     CommonModule,

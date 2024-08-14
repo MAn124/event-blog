@@ -10,6 +10,7 @@
   </div>
   <p class="m-auto col-12 lg:col-8 text-justify text-xl">{{ post.content }}</p>
 </div>
+<app-like-button *ngIf="post.id" [postId]="post.id"></app-like-button>
 <ng-template #noContent>
   <p>No content available</p>
 </ng-template>

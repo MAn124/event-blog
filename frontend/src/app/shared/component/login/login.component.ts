@@ -13,7 +13,6 @@ export class LoginComponent {
     this.authService.login(this.login).subscribe({
       next: (data) => {
         console.log('Login successful:', data);
-        // TODO: Redirect to dashboard or home page
       },
       error: (error) => {
         console.log(error);
