@@ -41,7 +41,7 @@ public class AppConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http .csrf(AbstractHttpConfigurer::disable);
-            http.authorizeHttpRequests(auth -> auth.requestMatchers("**").permitAll().anyRequest().authenticated())
+            http.authorizeHttpRequests(auth -> auth.requestMatchers("/v1/api/user/**").authenticated().anyRequest().permitAll())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(provider()).addFilterBefore(prefilter, UsernamePasswordAuthenticationFilter.class);
 

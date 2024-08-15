@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDetailsService userDetailsService() {
-       return username -> userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("USer not found"));
+       return username -> userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
     }
     @Override
     public User createUser(UserRequest request) {
