@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../core/service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -9,12 +10,19 @@ import { AuthService } from '../core/service/auth.service';
 export class UserComponent {
   currentUser: string = '';
 
-  constructor(private authService: AuthService){
+  constructor(private authService: AuthService,
+    private router:Router
+  ){
 
   }
   ngOnInit(){this.getCurrentUsername()}
 
   getCurrentUsername(){
    this.currentUser = this.authService.getUsername();
+  }
+  logout(){
+    this.authService.removeToken();
+    this.authService.removeUsername();
+    this.router.navigate(['/login']);
   }
 }

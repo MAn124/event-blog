@@ -24,6 +24,9 @@ public class JwtServiceImpl implements JwtService {
     public String generateToken(UserDetails user) {
         return createToken(new HashMap<>(),user);
     }
+    public String generateRefreshToken(UserDetails user) {
+        return createRefreshToken(new HashMap<>(),user);
+    }
 
     @Override
     public String extractUsername(String token) {
@@ -42,6 +45,15 @@ public class JwtServiceImpl implements JwtService {
                 .setSubject(user.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() * 1000 * 60 * 60 *24))
+                .signWith(getKey(), SignatureAlgorithm.HS256)
+                .compact();
+    }
+    private String createRefreshToken(Map<String, Object> claims, UserDetails user) {
+        return Jwts.builder()
+                .setClaims(claims)
+                .setSubject(user.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() * 1000 * 60 * 60 *24 * 7))
                 .signWith(getKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

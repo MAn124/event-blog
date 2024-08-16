@@ -66,7 +66,6 @@ export class FeedComponent {
         },
       });
     } else {
-      this.post.createBy = '1';
       this.postService.create(this.post).subscribe({
         next: (id) => {
           this.post.id = id;

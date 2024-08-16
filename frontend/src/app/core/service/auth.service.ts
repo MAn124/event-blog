@@ -8,6 +8,7 @@ import { BASE_URL } from '../config/config';
   providedIn: 'root'
 })
 export class AuthService {
+  
   private apiUrl = 'http://localhost:8080/v1/api/auth/login';
   constructor(private http: HttpClient) { }
   login(credentials: {username: any, password: any}):Observable<any>{
@@ -45,6 +46,9 @@ export class AuthService {
    */
   removeUsername(): void {
     return window.localStorage.removeItem("currentUsername");
+  }
+  canActive(): boolean {
+    return !!this.getToken();
   }
 }
 

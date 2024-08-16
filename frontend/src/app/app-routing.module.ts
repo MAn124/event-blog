@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { StaffComponent } from './staff/staff.component';
 import { UserComponent } from './user/user.component';
 import { LoginComponent } from './shared/component/login/login.component';
+import { authGuard } from './core/guard/auth.guard';
+import { NotFoundComponent } from './shared/component/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -14,6 +16,7 @@ const routes: Routes = [
     {
     path:'staff',
     component: StaffComponent,
+    canActivate:[authGuard],
     loadChildren:() =>
       import('./staff/staff.module').then(e => e.StaffModule)
     },
@@ -21,6 +24,11 @@ const routes: Routes = [
       path:'login',
       component: LoginComponent,
       title:'Login'
+    },
+    {
+      path:'404',
+      component: NotFoundComponent,
+      title:'Page not found'
     }
 
 ];

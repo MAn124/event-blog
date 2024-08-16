@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../core/service/auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,9 +9,16 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   login : any = {username: '', password: ''}
+  message: string = '';
   constructor(private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ){}
+  ngOnInit(){
+      this.route.queryParams.subscribe(params =>{
+        this.message = params['message'];
+      })
+  }
   onLogin(){
     this.authService.removeUsername();
     this.authService.removeToken();

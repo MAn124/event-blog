@@ -1,3 +1,5 @@
+;
+import { NotFoundComponent } from './component/not-found/not-found.component'
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PostComponent } from './component/post/post.component';
@@ -11,12 +13,14 @@ import { LikeButtonComponent } from './component/like-button/like-button.compone
 
 
 
+
 @NgModule({
   declarations: [
     PostComponent,
     PostDetailComponent,
     LoginComponent,
-    LikeButtonComponent
+    LikeButtonComponent,
+     NotFoundComponent
   ],
   imports: [
     CommonModule,
