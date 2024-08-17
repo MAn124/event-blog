@@ -33,6 +33,7 @@ export class UserManagementComponent {
     this.roleService.getAllRoles().subscribe({
       next: (roles) => {
         this.roles = roles;
+        console.log('Roles :', this.roles);
       },
       error: (error) => {
         console.log(error);

@@ -23,7 +23,7 @@ public class Post extends AbtractEntity<Long> implements Serializable {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "content")
+    @Column(name = "content",length = 65555)
     private String content;
 
     @ElementCollection

@@ -52,13 +52,8 @@
       </div>
       <div  class="flex flex-column gap-2 mb-4">
         <label for="content">Content</label>
-        <textarea
-          id="content"
-          rows="5"
-          cols="30"
-          pInputTextarea
-          [(ngModel)]="post.content"
-        ></textarea>
+        <p-editor [(ngModel)]="post.content" [style]="{ height: '320px' }" />
+      
       </div>
 
       <ng-container *ngIf="isEditable">

@@ -13,6 +13,7 @@ import { ChipsModule } from 'primeng/chips';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TagModule } from 'primeng/tag';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { EditorModule } from 'primeng/editor';
 @NgModule({
     declarations:[],
     exports:[ButtonModule,
@@ -27,7 +28,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
         ChipsModule,
         InputTextModule,
         TagModule,
-        ConfirmDialogModule
+        ConfirmDialogModule,
+        EditorModule
     ]
 })
 export class PrimeNgModule {

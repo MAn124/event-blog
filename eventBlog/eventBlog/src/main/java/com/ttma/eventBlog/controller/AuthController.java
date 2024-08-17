@@ -4,6 +4,7 @@ import com.ttma.eventBlog.Service.AuthenticateService;
 import com.ttma.eventBlog.dto.request.LoginRequest;
 import com.ttma.eventBlog.dto.response.ResponseError;
 import com.ttma.eventBlog.dto.response.ResponseToken;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -24,9 +25,12 @@ public class AuthController {
         try{
             return new ResponseEntity<>(authenticateService.authenticate(request), HttpStatus.OK);
         } catch (Exception e){
-            log.error("error message ={}",e.getMessage(),e.getCause());
+            log.error("error message: {}",e.getMessage(),e.getCause());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
+    }
+    @PostMapping("/refresh")
+    public  ResponseEntity<ResponseToken> refresh(HttpServletRequest request){
+        return new ResponseEntity<>(authenticateService.refresh(request),HttpStatus.OK);
     }
 }

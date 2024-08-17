@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BASE_URL } from '../config/config';
 import { map, Observable } from 'rxjs';
 import { Role } from '../interface/role';
 
@@ -15,7 +14,9 @@ export class RoleService {
   getAllRoles():Observable<Role[]>{
     return this.http.get<ApiResponse>(this.baseUrl).pipe(
       map(response => response.data)
+     
     );
+    
   }
 }
 interface ApiResponse {
