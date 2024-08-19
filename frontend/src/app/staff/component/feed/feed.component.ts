@@ -71,10 +71,11 @@ export class FeedComponent {
           this.post.id = id;
           console.log(id);
           this.isVisible = false;
-          this.posts.push({
+          this.posts.unshift({
             ...this.post,
             id: id,
             createAt: new Date().toJSON(),
+            
           });
           this.posts = [...this.posts]
           this.messageService.add({

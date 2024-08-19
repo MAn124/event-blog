@@ -91,9 +91,10 @@ export class UserManagementComponent {
           this.user.id = id;
           console.log(id);
           this.isVisible = false;
-          this.users.push({
+          this.users.unshift({
             ...this.user,
             id: id,
+            
           });
           this.messageService.add({
             severity: 'success',
