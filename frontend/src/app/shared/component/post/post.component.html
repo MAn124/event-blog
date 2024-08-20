@@ -9,7 +9,7 @@
     <div class="flex gap-1">
       <p-tag *ngFor="let tag of post.tags" value="{{tag}}" [rounded]="true" />
     </div>
-    <div class="flex gap-2 justify-content-end">
+    <div class="mt-2 flex gap-2 justify-content-end">
       <p-button *ngIf="canEdit" (click) = "isEdit.emit()" label="Edit" severity="success" ></p-button>
       <p-button *ngIf="canEdit" [routerLink]="['./posts/'+ post.id]" label="Details" severity="primary" ></p-button>
 

@@ -69,7 +69,7 @@
           <i class="pi" [ngClass]="{ 'text-green-500 pi-check-circle': user.active, 'text-red-500 pi-times-circle': !user.active }"></i>
         </td>
         <td>
-          {{ user.role}}
+          {{ getRole(user.role)}}
         </td>
       </tr>
     </ng-template>
@@ -121,8 +121,8 @@
             <input pInputText id="username" [(ngModel)] = "user.username">
           </div>
           <div *ngIf="!isEditable"  class="flex flex-column gap-2 mb-4">
-            <label for="password">Password</label>
-            <input pInputText id="password" [(ngModel)] = "user.password">
+        <p-password [(ngModel)]="user.password" [feedback]="false" [inputStyle]="{'width':'100%'}"/>
+        <label for="password">Password</label>
           </div>
           <div class="flex flex-column gap-2 mb-4">
             <label for="email">Email</label>

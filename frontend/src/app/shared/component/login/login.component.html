@@ -6,7 +6,8 @@
       </div>
     <div class="flex flex-column gap-2 mb-4">
         <label for="password">Password</label>
-        <input pInputText id="password" [(ngModel)] = "login.password">
+        <p-password [(ngModel)]="login.password" [feedback]="false" [inputStyle]="{'width':'100%'}"/>
+
       </div>
      <p-button (click)="onLogin()" label="Login" severity="success" class="ml-auto"></p-button>
      <p routerLink="['/']" class="text-center cursor-hover">Return homepage</p>

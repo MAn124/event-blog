@@ -23,9 +23,10 @@ public class RoleController {
         }
     }
     @GetMapping("/list")
-    public ResponseData<?> getAllRole(){
+    public ResponseData<?> getAllRole(@RequestParam(defaultValue = "0", required = false) int pageNo,
+                                      @RequestParam(defaultValue = "20", required = false)int pageSize){
         try {
-            return new ResponseData<>(HttpStatus.OK.value(), "success",roleService.getAllRole());
+            return new ResponseData<>(HttpStatus.OK.value(), "success",roleService.getAllRole(pageNo, pageSize));
         } catch (Exception e){
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), "Failed");
         }

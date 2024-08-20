@@ -14,6 +14,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { TagModule } from 'primeng/tag';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { EditorModule } from 'primeng/editor';
+import { PasswordModule } from 'primeng/password';
 @NgModule({
     declarations:[],
     exports:[ButtonModule,
@@ -29,7 +30,8 @@ import { EditorModule } from 'primeng/editor';
         InputTextModule,
         TagModule,
         ConfirmDialogModule,
-        EditorModule
+        EditorModule,
+        PasswordModule
     ]
 })
 export class PrimeNgModule {

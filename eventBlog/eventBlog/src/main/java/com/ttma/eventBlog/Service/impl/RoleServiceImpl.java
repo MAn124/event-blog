@@ -2,9 +2,13 @@ package com.ttma.eventBlog.Service.impl;
 
 import com.ttma.eventBlog.Service.RoleService;
 import com.ttma.eventBlog.dto.request.RoleRequest;
+import com.ttma.eventBlog.dto.response.ResponseRole;
 import com.ttma.eventBlog.model.Role;
 import com.ttma.eventBlog.repository.RoleRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +18,14 @@ import java.util.List;
 public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
     @Override
-    public List<Role> getAllRole() {
-        return roleRepository.findAll();
+    public List<ResponseRole> getAllRole(int pageNo, int PageSize) {
+        Pageable pageable = PageRequest.of(pageNo, PageSize);
+        Page<Role> roles =  roleRepository.findAll(pageable);
+        return roles.map(role -> ResponseRole.builder()
+                .id(role.getId())
+                .name(String.valueOf(role.getName()))
+                .description(role.getDescription())
+                .build()).toList();
     }
 
     @Override

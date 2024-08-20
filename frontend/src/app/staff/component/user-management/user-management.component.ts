@@ -40,6 +40,9 @@ export class UserManagementComponent {
       },
     });
   }
+  getRole(id: number){
+    return this.roles.find(role => role.id === id)?.name;
+  }
   getUsers() {
     this.userService.getAllUsers().subscribe({
       next: (users) => {
