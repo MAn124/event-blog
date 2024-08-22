@@ -76,7 +76,7 @@
   
   </p-table>
 </div>
-<!-- Formn -->
+<!-- Form -->
 <div class="card flex justify-content-center">
  
   <p-dialog 
@@ -108,10 +108,10 @@
         optionValue="id"
         placeholder="Role" />
           </div>
-          <div class="flex flex-column gap-2 mb-4">
+          <div class="flex flex-column gap-2 mb-4" read-only>
             <label for="username">Status</label>
             <p-selectButton 
-            [options]="[{label:'Active', value:true},{label:'InActive', value:false}]" 
+            [options]="[{label:'Active', value:true},{label:'Disable', value:false}]" 
             [(ngModel)]="user.active" 
             optionLabel="label" 
             optionValue="value" />

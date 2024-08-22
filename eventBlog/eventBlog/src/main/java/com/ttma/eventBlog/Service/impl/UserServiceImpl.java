@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -21,12 +22,13 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
 
+
     @Override
     public UserDetailsService userDetailsService() {
        return username -> userRepository.findByUsername(username).orElseThrow(() -> new RuntimeException("User not found"));
     }
     @Override
-    public User createUser(UserRequest request) {
+    public long createUser(UserRequest request) {
         User user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
@@ -36,7 +38,8 @@ public class UserServiceImpl implements UserService {
                 .password(request.getPassword())
                 .email(request.getEmail())
                 .build();
-        return userRepository.save(user);
+        userRepository.save(user);
+        return user.getId();
     }
 
     @Override
@@ -56,12 +59,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(long id) {
-        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+    public ResponseUser getUser(long id) {
+        User user = getUserById(id);
+     return   ResponseUser.builder()
+             .id(user.getId())
+             .lastName(user.getLastName())
+             .firstName(user.getFirstName())
+             .role(user.getRole().getId())
+             .email(user.getEmail())
+             .password(user.getPassword())
+             .active(user.isActive())
+             .build();
+
     }
 
     @Override
-    public User updateUser(long id, UserRequest request) {
+    public void updateUser(long id, UserRequest request) {
         User user = getUserById(id);
         user.setUsername(request.getUsername());
         user.setPassword(request.getPassword());
@@ -70,11 +83,14 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(request.getFirstName());
         user.setRole(roleRepository.findById(Long.valueOf(request.getRole())).orElseThrow(() -> new RuntimeException("Role not found")));
         user.setActive(request.isActive());
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     @Override
     public void deleteUser(long id) {
         userRepository.deleteById(id);
+    }
+    private User getUserById(long id){
+        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }
 }

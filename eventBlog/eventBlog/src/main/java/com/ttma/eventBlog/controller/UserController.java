@@ -37,7 +37,7 @@ public class UserController {
     @GetMapping("/detail/{id}")
     public ResponseData<?> getCateById(@PathVariable("id") int id){
         try{
-            return new ResponseData<>(HttpStatus.OK.value(), "success",userService.getUserById(id));
+            return new ResponseData<>(HttpStatus.OK.value(), "success",userService.getUser(id));
         } catch (Exception e){
             log.error("error message={}",e.getMessage(),e.getCause());
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), "failed");
@@ -46,7 +46,8 @@ public class UserController {
     @PutMapping("/update/{id}")
     public ResponseData<?> updateCate(@PathVariable("id") long id, @RequestBody UserRequest request){
         try{
-            return new ResponseData<>(HttpStatus.OK.value(), "success",userService.updateUser(id, request));
+            userService.updateUser(id, request);
+            return new ResponseData<>(HttpStatus.OK.value(), "success");
         } catch (Exception e){
             log.error("error message={}",e.getMessage(),e.getCause());
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), "failed");

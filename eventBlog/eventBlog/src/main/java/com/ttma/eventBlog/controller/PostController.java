@@ -38,7 +38,7 @@ public class PostController {
     @GetMapping("/detail/{id}")
     public ResponseData<?> getCateById(@PathVariable("id") long id){
         try{
-            return new ResponseData<>(HttpStatus.OK.value(), "success",postService.getPostById(id));
+            return new ResponseData<>(HttpStatus.OK.value(), "success",postService.getPost(id));
         } catch (Exception e){
             log.error("error message={}",e.getMessage(),e.getCause());
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), "failed");
@@ -46,8 +46,8 @@ public class PostController {
     }
     @PutMapping("/update/{id}")
     public ResponseData<?> updatePost(@PathVariable("id") long id, @RequestBody PostRequest request){
-        try{
-            return new ResponseData<>(HttpStatus.OK.value(), "success",postService.updatePost(id, request));
+        try{postService.updatePost(id, request);
+            return new ResponseData<>(HttpStatus.OK.value(), "success");
         } catch (Exception e){
             log.error("error message={}",e.getMessage(),e.getCause());
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), "failed");

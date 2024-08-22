@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface UserService {
     UserDetailsService userDetailsService();
-    User createUser(UserRequest request);
+    long createUser(UserRequest request);
     List<ResponseUser> getAllUser(int pageNo, int pageSize);
-    User getUserById(long id);
-    User updateUser(long id, UserRequest request);
+    ResponseUser getUser(long id);
+    void updateUser(long id, UserRequest request);
     void deleteUser(long id);
 }

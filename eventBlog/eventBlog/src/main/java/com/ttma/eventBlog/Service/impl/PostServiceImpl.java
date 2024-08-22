@@ -1,11 +1,13 @@
 package com.ttma.eventBlog.Service.impl;
 
 import com.ttma.eventBlog.Service.PostService;
+import com.ttma.eventBlog.Service.UserService;
 import com.ttma.eventBlog.dto.request.PostRequest;
 
 import com.ttma.eventBlog.dto.response.ResponsePost;
 import com.ttma.eventBlog.model.Post;
 import com.ttma.eventBlog.repository.PostRepository;
+import com.ttma.eventBlog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,15 +19,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PostServiceImpl implements PostService {
     private final PostRepository postRepository;
+    private final UserRepository userRepository;
     @Override
-    public Post createPost(PostRequest request) {
+    public long createPost(PostRequest request) {
         Post post = Post.builder()
                 .createBy(request.getCreateBy())
                 .title(request.getTitle())
                 .content(request.getContent())
                 .tags(request.getTags())
                 .build();
-        return postRepository.save(post);
+       postRepository.save(post);
+       return post.getId();
     }
 
     @Override
@@ -43,22 +47,33 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public Post getPostById(long id) {
-        return postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
+    public ResponsePost getPost(long id) {
+       Post post = getPostById(id);
+       return ResponsePost.builder()
+               .id(post.getId())
+               .title(post.getTitle())
+               .tags(post.getTags())
+               .content(post.getContent())
+               .createBy(post.getCreateBy())
+               .createAt(post.getCreateAt())
+               .build();
     }
 
     @Override
-    public Post updatePost(long id, PostRequest request) {
+    public void updatePost(long id, PostRequest request) {
         Post post = getPostById(id);
         post.setCreateBy(request.getCreateBy());
         post.setTitle(request.getTitle());
         post.setTags(request.getTags());
         post.setContent(request.getContent());
-        return postRepository.save(post);
+         postRepository.save(post);
     }
 
     @Override
     public void deletePost(long id) {
         postRepository.deleteById(id);
+    }
+    private Post getPostById(long id){
+        return postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found"));
     }
 }

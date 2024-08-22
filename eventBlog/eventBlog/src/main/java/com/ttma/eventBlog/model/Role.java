@@ -21,6 +21,7 @@ public class Role  {
     @Enumerated(EnumType.STRING)
     private RoleEnum name;
     private String description;
+
     @OneToMany(mappedBy = "role")
     private Set<User> users = new HashSet<>();
 }

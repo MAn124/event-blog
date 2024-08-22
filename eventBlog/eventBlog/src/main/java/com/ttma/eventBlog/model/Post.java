@@ -32,8 +32,7 @@ public class Post extends AbtractEntity<Long> implements Serializable {
     @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private Set<Like> likes = new HashSet<>();
 
-    @CreatedBy
-    @Column(updatable = false)
     private Long createBy;
+
 
 }

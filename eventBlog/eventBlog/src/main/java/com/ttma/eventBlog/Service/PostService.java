@@ -10,10 +10,10 @@ import com.ttma.eventBlog.model.Post;
 import java.util.List;
 
 public interface PostService {
-    Post createPost(PostRequest request);
+    long createPost(PostRequest request);
     List<ResponsePost> getAllPost(int pageNo, int pageSize);
-    Post getPostById(long id);
-    Post updatePost(long id, PostRequest request);
+    ResponsePost getPost(long id);
+    void updatePost(long id, PostRequest request);
     void deletePost(long id);
 
 }
