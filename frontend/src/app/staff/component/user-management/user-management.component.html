@@ -99,7 +99,7 @@
             <label for="lastName">Last Name</label>
             <input pInputText id="lastName" [(ngModel)] = "user.lastName">
           </div>
-          <div class="flex flex-column gap-2 mb-4">
+          <div  *ngIf="isEditable" class="flex flex-column gap-2 mb-4">
             <label for="lastName">Role</label>
             <p-dropdown 
         [options]="roles" 
@@ -108,7 +108,7 @@
         optionValue="id"
         placeholder="Role" />
           </div>
-          <div class="flex flex-column gap-2 mb-4" read-only>
+          <div *ngIf="isEditable" class="flex flex-column gap-2 mb-4">
             <label for="username">Status</label>
             <p-selectButton 
             [options]="[{label:'Active', value:true},{label:'Disable', value:false}]" 

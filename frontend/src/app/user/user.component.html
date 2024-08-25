@@ -2,7 +2,7 @@
     <div class="m-auto col-12 xl:col-8 flex justify-content-between align-items-center">
         <img [routerLink]="['/']" width="64px" src="../../assets/images/tom.jpg" alt="">
         <div *ngIf="currentUser" class="flex align-items-center gap-2">
-            <p>
+            <p  [routerLink]="['./staff']">
                {{currentUser}}
             </p>
             <p-button (click)="logout()"  label="Logout"></p-button>

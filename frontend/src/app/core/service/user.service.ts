@@ -31,7 +31,17 @@ export class UserService {
     const updateUrl =`${BASE_URL}/user/update/${id}`;
     return this.http.put<string>(updateUrl, user)
   }
-    
+  searchUser(keyword: string): Observable<User[]> {
+    const searchUserUrl = `${BASE_URL}&search=${keyword}`;
+    return this.getUserBySearch(searchUserUrl);
+  }
+
+  private getUserBySearch(searchUserUrl: string): Observable<User[]> {
+    return this.http
+      .get<ApiResponse>(searchUserUrl)
+      .pipe(map((response) => response.data));
+  }
+
   
 }
 interface ApiResponse {

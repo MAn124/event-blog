@@ -8,5 +8,4 @@ import lombok.Getter;
 public class ResponseRole {
     private Integer id;
     private String name;
-    private String description;
 }

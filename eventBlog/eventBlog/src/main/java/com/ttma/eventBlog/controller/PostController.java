@@ -5,6 +5,7 @@ import com.ttma.eventBlog.dto.request.PostRequest;
 import com.ttma.eventBlog.dto.request.UserRequest;
 import com.ttma.eventBlog.dto.response.ResponseData;
 import com.ttma.eventBlog.dto.response.ResponseError;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class PostController {
     private final PostService postService;
     @PostMapping("/create")
-    public ResponseData<?> createPost(@RequestBody PostRequest request){
+    public ResponseData<?> createPost(@Valid @RequestBody PostRequest request){
         try{
             return new ResponseData<>(HttpStatus.OK.value(), "success",postService.createPost(request));
         } catch (Exception e){
@@ -45,7 +46,7 @@ public class PostController {
         }
     }
     @PutMapping("/update/{id}")
-    public ResponseData<?> updatePost(@PathVariable("id") long id, @RequestBody PostRequest request){
+    public ResponseData<?> updatePost(@PathVariable("id") long id,@Valid @RequestBody PostRequest request){
         try{postService.updatePost(id, request);
             return new ResponseData<>(HttpStatus.OK.value(), "success");
         } catch (Exception e){

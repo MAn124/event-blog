@@ -6,6 +6,7 @@ import com.ttma.eventBlog.model.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     UserDetailsService userDetailsService();
@@ -14,4 +15,6 @@ public interface UserService {
     ResponseUser getUser(long id);
     void updateUser(long id, UserRequest request);
     void deleteUser(long id);
+
+    Optional<User> getUserByUsername(String username);
 }

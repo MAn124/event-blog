@@ -4,6 +4,7 @@ import { User } from '../../../core/interface/user';
 import { RoleService } from '../../../core/service/role.service';
 import { UserService } from '../../../core/service/user.service';
 import { MessageService } from 'primeng/api';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-user-management',
@@ -15,6 +16,7 @@ export class UserManagementComponent {
   roles!: Role[];
   users!: User[];
   user!: User;
+  formGroup!: FormGroup
   isVisible: boolean = false;
   isEditable: boolean = false;
 
@@ -64,7 +66,7 @@ export class UserManagementComponent {
     this.isVisible = true;
     this.user = {
       active: true,
-      role: 1,
+      role: 2,
     };
   }
   save() {

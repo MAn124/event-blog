@@ -11,10 +11,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RequiredArgsConstructor
@@ -90,6 +90,12 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(long id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<User> getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     private User getUserById(long id){
         return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
     }

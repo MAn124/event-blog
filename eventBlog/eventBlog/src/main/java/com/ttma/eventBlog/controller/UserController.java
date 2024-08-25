@@ -4,7 +4,9 @@ import com.ttma.eventBlog.Service.UserService;
 import com.ttma.eventBlog.dto.request.UserRequest;
 import com.ttma.eventBlog.dto.response.ResponseData;
 import com.ttma.eventBlog.dto.response.ResponseError;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
     @PostMapping("/create")
-    public ResponseData<?> createUser(@RequestBody UserRequest request){
+    public ResponseData<?> createUser(@Valid @RequestBody UserRequest request){
         try{
             return new ResponseData<>(HttpStatus.OK.value(), "success",userService.createUser(request));
         } catch (Exception e){
@@ -44,7 +46,7 @@ public class UserController {
         }
     }
     @PutMapping("/update/{id}")
-    public ResponseData<?> updateCate(@PathVariable("id") long id, @RequestBody UserRequest request){
+    public ResponseData<?> updateCate(@PathVariable("id") long id,@Valid @RequestBody UserRequest request){
         try{
             userService.updateUser(id, request);
             return new ResponseData<>(HttpStatus.OK.value(), "success");
@@ -61,6 +63,14 @@ public class UserController {
         } catch (Exception e){
             log.error("error message={}",e.getMessage(),e.getCause());
             return new ResponseError(HttpStatus.BAD_REQUEST.value(), "failed");
+        }
+    }
+    @GetMapping("/search/{username}")
+    public ResponseData<?> getUserByUsername(@RequestParam(required = false) String username){
+        try{
+            return new ResponseData<>(HttpStatus.OK.value(), "success",userService.getUserByUsername(username));
+        }catch (Exception e){
+            return new ResponseError(HttpStatus.NOT_FOUND.value(),"User not found");
         }
     }
 }

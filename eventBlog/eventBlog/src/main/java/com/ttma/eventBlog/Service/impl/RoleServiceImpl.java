@@ -24,7 +24,6 @@ public class RoleServiceImpl implements RoleService {
         return roles.map(role -> ResponseRole.builder()
                 .id(role.getId())
                 .name(String.valueOf(role.getName()))
-                .description(role.getDescription())
                 .build()).toList();
     }
 
