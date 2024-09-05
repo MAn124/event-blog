@@ -3,6 +3,7 @@ import { BASE_URL } from '../config/config';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { User } from '../interface/user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class UserService {
 
   private baseUrl  = BASE_URL + '/user/list';
 
-  constructor(private http: HttpClient) { }
+  constructor(  private router:Router,private http: HttpClient) { }
 
   // get all roles
   getAllUsers():Observable<User[]>{
@@ -32,17 +33,15 @@ export class UserService {
     return this.http.put<string>(updateUrl, user)
   }
   searchUser(keyword: string): Observable<User[]> {
-    const searchUserUrl = `${BASE_URL}&search=${keyword}`;
-    return this.getUserBySearch(searchUserUrl);
+    const searchUserUrl = `${BASE_URL}/user?search=${keyword}`;
+    console.log(searchUserUrl);
+    return this.http.get<ApiResponse>(searchUserUrl).pipe(
+      map(response => response.data)
+    );
   }
 
-  private getUserBySearch(searchUserUrl: string): Observable<User[]> {
-    return this.http
-      .get<ApiResponse>(searchUserUrl)
-      .pipe(map((response) => response.data));
-  }
 
-  
+
 }
 interface ApiResponse {
   data: User[];

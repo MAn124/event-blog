@@ -9,7 +9,7 @@
       <div class="flex">
         <p-button (click)="openDialogNew()" label="New"  severity="success" icon="pi pi-plus"></p-button>
         <span  class="ml-auto p-input-icon-left">        
-            <i class="pi pi-search"></i>    
+            <i class="pi pi-search" (click)="doSearch(search.value)"></i>    
           <input #search
             pInputText
             type="text"

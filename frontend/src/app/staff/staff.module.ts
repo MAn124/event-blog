@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StaffComponent } from './staff.component';
 import { PrimeNgModule } from '../primeng.modules';
@@ -10,6 +10,7 @@ import { UserIdToNamePipe } from '../core/pipe/user-id-to-name.pipe';
 import { CoreModule } from '../core/core.module';
 import { SharedModule } from '../shared/shared.module';
 import { PostDetailComponent } from '../shared/component/post-detail/post-detail.component';
+import { Children } from 'react';
 
 const routes: Routes = [
   {
@@ -19,10 +20,12 @@ const routes: Routes = [
   {
     path: 'user-management',
     component: UserManagementComponent,
+    children: [{ path: ':keyword', component: UserManagementComponent }],
   },
+
   {
     path: 'posts',
-    children:[
+    children: [
       {
         path: ':id',
         component: PostDetailComponent,

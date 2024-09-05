@@ -1,7 +1,6 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../../../core/service/post.service';
-import { Post } from '../../../core/interface/post';
 
 @Component({
   selector: 'app-post-detail',

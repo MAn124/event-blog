@@ -66,9 +66,9 @@ public class UserController {
         }
     }
     @GetMapping("/search/{username}")
-    public ResponseData<?> getUserByUsername(@RequestParam(required = false) String username){
+    public ResponseData<?> getUserByUsername(@RequestParam(required = false) String firstName){
         try{
-            return new ResponseData<>(HttpStatus.OK.value(), "success",userService.getUserByUsername(username));
+            return new ResponseData<>(HttpStatus.OK.value(), "success",userService.findByFirstName(firstName));
         }catch (Exception e){
             return new ResponseError(HttpStatus.NOT_FOUND.value(),"User not found");
         }

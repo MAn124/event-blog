@@ -5,6 +5,7 @@ import { RoleService } from '../../../core/service/role.service';
 import { UserService } from '../../../core/service/user.service';
 import { MessageService } from 'primeng/api';
 import { FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-management',
@@ -19,16 +20,20 @@ export class UserManagementComponent {
   formGroup!: FormGroup
   isVisible: boolean = false;
   isEditable: boolean = false;
-
+  isSearched: boolean = false;
   constructor(
     private roleService: RoleService,
     private userService: UserService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.getRoles();
-    this.getUsers();
+  
+     this.getUsers();
+   
+   this.getRoles();
   }
 
   getRoles() {
@@ -56,6 +61,7 @@ export class UserManagementComponent {
       },
     });
   }
+ 
   openDialogEdit(user: any) {
     this.isEditable = true;
     this.isVisible = true;
@@ -112,5 +118,16 @@ export class UserManagementComponent {
         },
       });
     }
+  }
+  doSearch(value: string){
+    this.userService.searchUser(value).subscribe({
+      next: (users) => {
+        this.users = users;
+        console.log(users);
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    })
   }
 }
