@@ -42,8 +42,6 @@ public class User extends AbtractEntity<Long> implements UserDetails, Serializab
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Like> likes = new HashSet<>();
 
 
     @Override
